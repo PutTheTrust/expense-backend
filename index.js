@@ -1,19 +1,19 @@
 const express = require("express");
-const dotenv = require("dotenv").config();
+const mongoose = require("mongoose");
+require("dotenv").config();
 const app = express();
+
+const expenseRouter = require("./routes/expenseRoutes");
+
 const port = process.env.PORT | 3000;
 
-app.get("/", (req, res) => {
-  try {
-    res.status(404).send({
-      status: "success",
-      messege: "Expense tracker",
-    });
-  } catch (e) {
-    console.log(e.messege);
-  }
-});
+app.use(express.json());
+
+app.use("/api/v1/expenses", expenseRouter);
+mongoose
+  .connect(process.env.CONNECTION)
+  .then(() => console.log("DB connection successful!"));
 
 app.listen(port, () => {
-  console.log(`Port running on ${port}`);
+  console.log(`Running on port ${port}`);
 });
