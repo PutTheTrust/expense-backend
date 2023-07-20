@@ -18,6 +18,10 @@ const expenseSchema = mongoose.Schema({
     type: String,
     required: [true, "Description is required"],
   },
+  userId: {
+    type: String,
+    required: [true, "Please login"],
+  },
 });
 
 const Expense = mongoose.model("Expense", expenseSchema);

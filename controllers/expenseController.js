@@ -1,8 +1,10 @@
 const Expense = require("../models/expenseModel");
+const User = require("../models/userModel");
 
 exports.getAllExpenses = async (req, res) => {
   try {
-    const expenses = await Expense.find();
+    const expenses = await Expense.find({ userId: req.body.userId });
+    console.log(expenses);
 
     res.status(200).json({
       status: "success",
@@ -18,6 +20,14 @@ exports.getAllExpenses = async (req, res) => {
 
 exports.createExpense = async (req, res) => {
   try {
+    const userId = await User.findOne({ _id: req.body.userId });
+    console.log(userId);
+    if (!userId) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Please login",
+      });
+    }
     const newExpense = await Expense.create(req.body);
 
     res.status(201).json({
