@@ -5,6 +5,7 @@ const app = express();
 
 const expenseRouter = require("./routes/expenseRoutes");
 const loanRouter = require("./routes/loanRoutes");
+const userRouter = require("./routes/userRoutes");
 
 const port = process.env.PORT | 3000;
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/api/v1/expenses", expenseRouter);
 app.use("/api/v1/loans", loanRouter);
+app.use("/api/v1/auth", userRouter);
 mongoose
   .connect(process.env.CONNECTION)
   .then(() => console.log("DB connection successful!"));
