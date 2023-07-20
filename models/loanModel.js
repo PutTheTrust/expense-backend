@@ -17,6 +17,10 @@ const loanSchema = mongoose.Schema({
     type: String,
     required: [true, "Status of the loan is required"],
   },
+  userId: {
+    type: String,
+    required: [true, "Please login"],
+  },
 });
 
 const Loan = mongoose.model("Loan", loanSchema);
