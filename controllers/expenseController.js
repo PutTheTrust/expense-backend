@@ -20,7 +20,8 @@ exports.getAllExpenses = async (req, res) => {
 
 exports.createExpense = async (req, res) => {
   try {
-    const userId = await User.findOne({ _id: req.body.userId });
+    console.log(req.body.data);
+    const userId = await User.findOne({ _id: req.body.data.userId });
     console.log(userId);
     if (!userId) {
       return res.status(401).json({
@@ -28,7 +29,7 @@ exports.createExpense = async (req, res) => {
         message: "Please login",
       });
     }
-    const newExpense = await Expense.create(req.body);
+    const newExpense = await Expense.create(req.body.data);
 
     res.status(201).json({
       status: "success",
