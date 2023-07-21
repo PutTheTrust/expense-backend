@@ -3,16 +3,16 @@ const User = require("../models/userModel");
 
 exports.getAllExpenses = async (req, res) => {
   try {
-    // const expenses = await Expense.find({ userId: req.params.userId });
+    const expenses = await Expense.find({ userId: req.params.id });
     // console.log(expenses);
-    console.log(req.params);
-    // res.status(200).json({
-    //   status: "success",
-    //   results: expenses.length,
-    //   data: {
-    //     expenses,
-    //   },
-    // });
+    // console.log(req.params);
+    res.status(200).json({
+      status: "success",
+      results: expenses.length,
+      data: {
+        expenses,
+      },
+    });
   } catch (e) {
     console.log(e);
   }

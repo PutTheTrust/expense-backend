@@ -22,6 +22,10 @@ const expenseSchema = mongoose.Schema({
     type: String,
     required: [true, "Please login"],
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Expense = mongoose.model("Expense", expenseSchema);
