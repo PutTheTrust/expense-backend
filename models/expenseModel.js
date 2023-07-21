@@ -4,7 +4,6 @@ const expenseSchema = mongoose.Schema({
   name: {
     type: String,
     required: [true, "An expense should have a name"],
-    unique: true,
   },
   price: {
     type: Number,
