@@ -4,7 +4,7 @@ const expenseController = require("../controllers/expenseController");
 const router = express.Router();
 
 router
-  .get("/:id", expenseController.getAllExpenses)
+  .get("/:userId", expenseController.getAllExpenses)
   .post("/", expenseController.createExpense);
 
 module.exports = router;

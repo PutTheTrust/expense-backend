@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 
 exports.getAllExpenses = async (req, res) => {
   try {
-    const expenses = await Expense.find({ userId: req.params.id });
+    const expenses = await Expense.find({ userId: req.params.userId });
     // console.log(expenses);
     // console.log(req.params);
     res.status(200).json({
