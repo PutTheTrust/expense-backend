@@ -7,4 +7,5 @@ router
   .get("/:userId", expenseController.getAllExpenses)
   .post("/", expenseController.createExpense);
 
+router.get("/group/:userId", expenseController.getMonthlyExpenses);
 module.exports = router;
