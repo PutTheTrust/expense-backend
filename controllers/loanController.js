@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 
 exports.getLoans = async (req, res) => {
   try {
-    const loans = await Loan.find({ userId: req.body.userId });
+    const loans = await Loan.find({ userId: req.params.userId });
 
     res.status(200).json({
       status: "success",
@@ -19,6 +19,7 @@ exports.getLoans = async (req, res) => {
 
 exports.createLoan = async (req, res) => {
   try {
+    // console.log(req.body);
     const userId = await User.findOne({ _id: req.body.userId });
     if (!userId) {
       return res.status(401).json({
