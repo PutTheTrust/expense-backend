@@ -45,19 +45,28 @@ exports.createExpense = async (req, res) => {
 exports.getMonthlyExpenses = async (req, res) => {
   // console.log(uId);
   try {
-    const uId = req.body.userId;
-    const months = await Expense.aggregate([
+    const uId = req.params.userId;
+    console.log(uId);
+    const categories = await Expense.aggregate([
       {
         $match: {
           userId: { $eq: uId },
         },
       },
-      { $group: { _id: "$category", total: { $sum: "$price" } } },
+      { $group: { _id: "$category", y: { $sum: "$price" } } },
+      {
+        $project: {
+          _id: 0,
+          x: "$_id",
+          y: 1,
+        },
+      },
     ]);
 
     res.status(201).json({
       status: "hit",
-      months,
+      results: categories.length,
+      categories,
     });
   } catch (e) {
     console.log(e);

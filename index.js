@@ -21,6 +21,7 @@ app.use(express.json());
 app.use("/api/v1/expenses", expenseRouter);
 app.use("/api/v1/loans", loanRouter);
 app.use("/api/v1/auth", userRouter);
+
 mongoose
   .connect(process.env.CONNECTION)
   .then(() => console.log("DB connection successful!"));

@@ -7,4 +7,6 @@ router
   .get("/:userId", loanController.getLoans)
   .post("/", loanController.createLoan);
 
+router.get("/group/:userId", loanController.getMonthlyController);
+
 module.exports = router;

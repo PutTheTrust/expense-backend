@@ -40,3 +40,34 @@ exports.createLoan = async (req, res) => {
     console.log(e);
   }
 };
+
+exports.getMonthlyController = async (req, res) => {
+  // console.log(uId);
+  try {
+    const uId = req.params.userId;
+    console.log(uId);
+    const categories = await Loan.aggregate([
+      {
+        $match: {
+          userId: { $eq: uId },
+        },
+      },
+      { $group: { _id: "$lender", y: { $sum: "$amount" } } },
+      {
+        $project: {
+          _id: 0,
+          x: "$_id",
+          y: 1,
+        },
+      },
+    ]);
+
+    res.status(201).json({
+      status: "hit",
+      results: categories.length,
+      categories,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
