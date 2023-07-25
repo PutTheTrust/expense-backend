@@ -41,6 +41,19 @@ exports.createLoan = async (req, res) => {
   }
 };
 
+exports.deleteLoan = async (req, res) => {
+  try {
+    await Loan.deleteOne({ _id: req.body.loanId });
+    console.log(req.body.loanId);
+
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 exports.getMonthlyController = async (req, res) => {
   // console.log(uId);
   try {

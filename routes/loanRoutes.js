@@ -5,7 +5,8 @@ const router = express.Router();
 
 router
   .get("/:userId", loanController.getLoans)
-  .post("/", loanController.createLoan);
+  .post("/", loanController.createLoan)
+  .delete("/", loanController.deleteLoan);
 
 router.get("/group/:userId", loanController.getMonthlyController);
 
