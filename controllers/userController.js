@@ -3,23 +3,24 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
-const signToken = (id) => {
-  return jwt.sign({ id: id }, process.env.JWT_SECRET, {
+const signToken = (id, name) => {
+  return jwt.sign({ id: id, name: name }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
 exports.signup = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, name } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const newUser = await User.create({
       email: email,
       password: hashedPassword,
+      name: name,
     });
 
-    const token = signToken(newUser._id);
+    const token = signToken(newUser._id, newUser.name);
 
     res.status(201).json({
       messege: "User created successfully",
@@ -35,7 +36,7 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    console.log(first);
+    // console.log(first);
     const { email, password } = req.body;
 
     // 1) Check if email and password exist
@@ -59,7 +60,7 @@ exports.login = async (req, res) => {
 
     // 3) If everything is ok, send to client
 
-    const token = signToken(user._id);
+    const token = signToken(user._id, user.name);
     res.status(200).json({
       status: "success",
       token,
