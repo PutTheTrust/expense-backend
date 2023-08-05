@@ -6,7 +6,8 @@ const router = express.Router();
 router
   .get("/:userId", expenseController.getAllExpenses)
   .post("/", expenseController.createExpense)
-  .delete("/", expenseController.deleteExpense);
+  .delete("/", expenseController.deleteExpense)
+  .patch("/", expenseController.updateExpense);
 
 router.get("/group/:userId", expenseController.getMonthlyExpenses);
 module.exports = router;

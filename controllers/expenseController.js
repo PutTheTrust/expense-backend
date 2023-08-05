@@ -55,6 +55,18 @@ exports.deleteExpense = async (req, res) => {
   }
 };
 
+exports.updateExpense = async (req, res) => {
+  try {
+    await Expense.findByIdAndUpdate(req.body.id, req.body);
+    console.log(req.body);
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 exports.getMonthlyExpenses = async (req, res) => {
   // console.log(uId);
   try {
