@@ -4,8 +4,6 @@ const User = require("../models/userModel");
 exports.getAllExpenses = async (req, res) => {
   try {
     const expenses = await Expense.find({ userId: req.params.userId });
-    // console.log(expenses);
-    // console.log(req.params);
     res.status(200).json({
       status: "success",
       results: expenses.length,
@@ -20,9 +18,7 @@ exports.getAllExpenses = async (req, res) => {
 
 exports.createExpense = async (req, res) => {
   try {
-    console.log(req.body);
     const userId = await User.findOne({ _id: req.body.userId });
-    console.log(userId);
     if (!userId) {
       return res.status(401).json({
         status: "fail",
@@ -45,7 +41,6 @@ exports.createExpense = async (req, res) => {
 exports.deleteExpense = async (req, res) => {
   try {
     await Expense.deleteOne({ _id: req.body.expenseId });
-    console.log("EXPENSE _>", req.body.expenseId);
 
     res.status(200).json({
       status: "success",
@@ -58,7 +53,6 @@ exports.deleteExpense = async (req, res) => {
 exports.updateExpense = async (req, res) => {
   try {
     await Expense.findByIdAndUpdate(req.body.id, req.body);
-    console.log(req.body);
     res.status(200).json({
       status: "success",
     });
@@ -68,10 +62,8 @@ exports.updateExpense = async (req, res) => {
 };
 
 exports.getMonthlyExpenses = async (req, res) => {
-  // console.log(uId);
   try {
     const uId = req.params.userId;
-    console.log(uId);
     const categories = await Expense.aggregate([
       {
         $match: {

@@ -19,7 +19,6 @@ exports.getLoans = async (req, res) => {
 
 exports.createLoan = async (req, res) => {
   try {
-    // console.log(req.body);
     const userId = await User.findOne({ _id: req.body.userId });
     if (!userId) {
       return res.status(401).json({
@@ -44,7 +43,6 @@ exports.createLoan = async (req, res) => {
 exports.deleteLoan = async (req, res) => {
   try {
     await Loan.deleteOne({ _id: req.body.loanId });
-    console.log(req.body.loanId);
 
     res.status(200).json({
       status: "success",
@@ -67,10 +65,8 @@ exports.updateLoan = async (req, res) => {
 };
 
 exports.getMonthlyController = async (req, res) => {
-  // console.log(uId);
   try {
     const uId = req.params.userId;
-    console.log(uId);
     const categories = await Loan.aggregate([
       {
         $match: {
