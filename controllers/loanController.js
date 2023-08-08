@@ -13,7 +13,10 @@ exports.getLoans = async (req, res) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -36,7 +39,10 @@ exports.createLoan = async (req, res) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -46,9 +52,13 @@ exports.deleteLoan = async (req, res) => {
 
     res.status(200).json({
       status: "success",
+      message: "Deleted successfuly",
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -60,7 +70,10 @@ exports.updateLoan = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    console.log(error);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -84,11 +97,14 @@ exports.getMonthlyController = async (req, res) => {
     ]);
 
     res.status(201).json({
-      status: "hit",
+      status: "success",
       results: categories.length,
       categories,
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };

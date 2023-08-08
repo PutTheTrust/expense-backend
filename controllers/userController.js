@@ -23,6 +23,7 @@ exports.signup = async (req, res) => {
     const token = signToken(newUser._id, newUser.name);
 
     res.status(201).json({
+      status: "success",
       messege: "User created successfully",
       token,
       data: {
@@ -30,7 +31,10 @@ exports.signup = async (req, res) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -65,6 +69,9 @@ exports.login = async (req, res) => {
       token,
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };

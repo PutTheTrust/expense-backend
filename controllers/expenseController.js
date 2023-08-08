@@ -12,7 +12,10 @@ exports.getAllExpenses = async (req, res) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -34,7 +37,10 @@ exports.createExpense = async (req, res) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -46,7 +52,10 @@ exports.deleteExpense = async (req, res) => {
       status: "success",
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -57,7 +66,10 @@ exports.updateExpense = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    console.log(error);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
 
@@ -81,11 +93,14 @@ exports.getMonthlyExpenses = async (req, res) => {
     ]);
 
     res.status(201).json({
-      status: "hit",
+      status: "success",
       results: categories.length,
       categories,
     });
   } catch (e) {
-    console.log(e);
+    res.status.json({
+      status: "fail",
+      messege: e.messege,
+    });
   }
 };
