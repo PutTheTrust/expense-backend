@@ -12,6 +12,17 @@ const signToken = (id, name) => {
 exports.signup = async (req, res) => {
   try {
     const { email, password, name } = req.body;
+
+    const checkDb = await User.findOne({ email });
+
+    if (checkDb) {
+      // return res.json({
+      //   status: "fail",
+      //   message: "Email already exists",
+      // });
+      throw new Error("Email already exists");
+    }
+
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const newUser = await User.create({
@@ -24,16 +35,16 @@ exports.signup = async (req, res) => {
 
     res.status(201).json({
       status: "success",
-      messege: "User created successfully",
+      message: "User created successfully",
       token,
       data: {
         newUser,
       },
     });
   } catch (e) {
-    res.status.json({
+    res.json({
       status: "fail",
-      messege: e.messege,
+      message: e.message,
     });
   }
 };
@@ -46,7 +57,7 @@ exports.login = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         status: "fail",
-        messege: "Please provide email and password",
+        message: "Please provide email and password",
       });
     }
 
@@ -57,7 +68,7 @@ exports.login = async (req, res) => {
       //   return next(new AppError('Incorrect email or password', 401));
       return res.status(401).json({
         status: "fail",
-        messege: "Incorrect email or password",
+        message: "Incorrect email or password",
       });
     }
 
@@ -69,9 +80,9 @@ exports.login = async (req, res) => {
       token,
     });
   } catch (e) {
-    res.status.json({
+    res.json({
       status: "fail",
-      messege: e.messege,
+      message: e.message,
     });
   }
 };
