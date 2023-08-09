@@ -11,4 +11,6 @@ router
 
 router.get("/group/:userId", loanController.getMonthlyController);
 
+router.get("/totals/total/:userId", loanController.getTotal);
+
 module.exports = router;

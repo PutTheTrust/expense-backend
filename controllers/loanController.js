@@ -77,6 +77,36 @@ exports.updateLoan = async (req, res) => {
   }
 };
 
+exports.getTotal = async (req, res) => {
+  try {
+    const uId = req.params.userId;
+    console.log(uId);
+    const total = await Loan.aggregate([
+      {
+        $match: {
+          userId: uId, // Replace with the actual user ID you're interested in
+        },
+      },
+      {
+        $group: {
+          _id: "$userId",
+          totalAmount: { $sum: "$amount" },
+        },
+      },
+    ]);
+    res.status(201).json({
+      status: "success",
+      results: total.length,
+      total,
+    });
+  } catch (e) {
+    res.json({
+      status: "fail",
+      messege: e.messege,
+    });
+  }
+};
+
 exports.getMonthlyController = async (req, res) => {
   try {
     const uId = req.params.userId;

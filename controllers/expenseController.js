@@ -104,3 +104,32 @@ exports.getMonthlyExpenses = async (req, res) => {
     });
   }
 };
+
+exports.getTotal = async (req, res) => {
+  try {
+    const uId = req.params.userId;
+    const total = await Expense.aggregate([
+      {
+        $match: {
+          userId: uId,
+        },
+      },
+      {
+        $group: {
+          _id: "$userId",
+          totalAmount: { $sum: "$price" },
+        },
+      },
+    ]);
+    res.status(201).json({
+      status: "success",
+      results: total.length,
+      total,
+    });
+  } catch (e) {
+    res.json({
+      status: "fail",
+      messege: e.messege,
+    });
+  }
+};

@@ -10,4 +10,7 @@ router
   .patch("/", expenseController.updateExpense);
 
 router.get("/group/:userId", expenseController.getMonthlyExpenses);
+
+router.get("/totals/total/:userId", expenseController.getTotal);
+
 module.exports = router;
