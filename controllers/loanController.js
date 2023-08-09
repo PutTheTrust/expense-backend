@@ -80,7 +80,7 @@ exports.updateLoan = async (req, res) => {
 exports.getTotal = async (req, res) => {
   try {
     const uId = req.params.userId;
-    console.log(uId);
+    // console.log(uId);
     const total = await Loan.aggregate([
       {
         $match: {
