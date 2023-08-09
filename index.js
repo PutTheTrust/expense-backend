@@ -8,7 +8,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://expense-backend-beta.vercel.app/",
+      "https://expense-backend-beta.vercel.app",
     ],
   })
 );
