@@ -37,7 +37,7 @@ exports.createExpense = async (req, res) => {
       },
     });
   } catch (e) {
-    res.status.json({
+    res.json({
       status: "fail",
       messege: e.messege,
     });
@@ -52,7 +52,7 @@ exports.deleteExpense = async (req, res) => {
       status: "success",
     });
   } catch (e) {
-    res.status.json({
+    res.json({
       status: "fail",
       messege: e.messege,
     });
@@ -66,7 +66,7 @@ exports.updateExpense = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    res.status.json({
+    res.json({
       status: "fail",
       messege: e.messege,
     });
@@ -98,7 +98,7 @@ exports.getMonthlyExpenses = async (req, res) => {
       categories,
     });
   } catch (e) {
-    res.status.json({
+    res.json({
       status: "fail",
       messege: e.messege,
     });
